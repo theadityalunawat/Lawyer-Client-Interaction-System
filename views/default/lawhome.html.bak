@@ -1,0 +1,56 @@
+{{extend 'layout.html'}}
+{{from gluon.tools import Mail}}
+ <center><img src="../static/images/images.png" style="width:200px;height:200px">
+<form action="{{=URL('actions')}}">
+<table border="2px">
+    {{i=1}}
+    <tr><th>S No.</th><th>Case_Id</th><th>First Name</th><th>Last Name</th><th>Summon date</th><th>Select</th></tr>
+{{for row in rows:}}
+{{if(row.law_id == l_id):}}
+{{if(str(row.Summon_date)==str(x) or str(row.Summon_date)==str(a1) or str(row.Summon_date)==str(a2) or str(row.Summon_date)==str(a3) or str(row.Summon_date)==str(a4) or str(row.Summon_date)==str(a5) or str(row.Summon_date)==str(a6) or str(row.Summon_date)==str(a7)):}}
+{{ 
+    mail = Mail()
+    mail.settings.server = 'smtp.gmail.com:587'
+    mail.settings.sender = 'lawyer.management@gmail.com'
+    mail.settings.login = 'lawyer.mangement@gmail.com:managementsystem'
+    
+    msg='You have your summon date shortly. Kindly check our website for full details.'
+    snd=str(row.email)
+    mail.send(to=[snd],
+    subject='Gentle Reminder :',
+    message=msg)}}
+<tr>
+<td><font color="red">{{=i}}</font></td>
+    <td><font color="red">{{=row.id}}</font></td>
+<td><font color="red">{{=row.first_name}}</font></td>    
+<td><font color="red">{{=row.last_name}}</font></td>
+<td><font color="red">{{=row.Summon_date}}</font></td>
+<td><font color="red"><input type="radio" name="rd" value={{=row.id}} checked="checked"/></font></td>
+</tr>
+{{i=i+1}}
+{{else:}}
+<tr>
+<td>{{=i}}</td>
+<td>{{=row.id}}</td>
+<td>{{=row.first_name}}</td>    
+<td>{{=row.last_name}}</td>
+<td>{{=row.Summon_date}}</td>
+    <td><input type="radio" name="rd" value={{=row.id}} checked="checked" /></td>
+</tr>
+    {{i=i+1}}
+{{pass}}
+{{pass}}
+{{pass}}
+    </table>
+    <br />
+    <select name="list">
+        <option value="view">View Case detail</option>
+        <option value="close">Close Case</option>
+        <option value="summon">Edit Summon date</option>
+        <option value="dis">Edit Case description</option>
+    </select>
+    <br />
+    <input type="submit" name="view_all" value="Perform Action">
+</form>
+<input type="button" name="case_enter" value="Enter a case" onclick="location.href='cases.html'">
+</center>

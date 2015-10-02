@@ -1,0 +1,8 @@
+{{extend 'layout.html'}}
+<center><img src="../static/images/images.png" style="width:200px;height:200px"></center>
+<form action="{{=URL('rating_temp')}}">
+    <h3>Lawyer's email : <input type ="email" name="leid" required /><br/></h3>
+    <h3>Rate your lawyer :&nbsp;&nbsp;&nbsp; <b>0</b><input type="range" name="points" min="0" max="5"><b>5</b><br/></h3>
+    <h3>Feedback : <textarea name="txt" rows="10" cols="10"></textarea> <br/></h3>
+    <center><input type="submit" value="Post" /></center>
+</form>

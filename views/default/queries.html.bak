@@ -1,0 +1,13 @@
+{{extend 'layout.html'}}
+<center><img src="../static/images/images5.png" style="width:200px;height:200px"></center>
+{{for row in rows:}}
+{{if(str(row.case_id) == str(case_id)):}}
+<b>{{=row.person}}:</b>
+{{=row.Msg}}
+<br />
+{{pass}}
+{{pass}}
+<form action="{{=URL('enter_msg')}}">
+    <h3>Enter your Message : <textarea name="txt" rows="10" cols="10"></textarea><br></h3>
+    <center><input type="submit" value="Send Message" /></center>
+    </form>

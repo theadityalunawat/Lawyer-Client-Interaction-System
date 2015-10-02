@@ -1,0 +1,7 @@
+{{extend 'layout.html'}}
+<div align="right">
+    <img src="../static/images/images.png" style="width:200px;height:200px">
+    </div>
+<h1>
+    Hello and Hiii
+</h1>

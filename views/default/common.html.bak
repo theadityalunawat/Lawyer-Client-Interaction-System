@@ -1,0 +1,9 @@
+{{extend 'layout.html'}}
+<center><img src="../static/images/images.png" style="width:200px;height:200px"></center>
+<form action="{{=URL('processs')}}">
+    <h3>Enter your Case ID :<input type="text" name="cid" required pattern="^[0-9]*"$/></h3>
+    <br />
+    <h3>Enter your Email :&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" name="eid" required/></h3>
+    <br />
+    <center><input type="submit" value="Fetch My Details" /></center>
+    </form>

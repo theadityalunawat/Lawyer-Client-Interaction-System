@@ -1,0 +1,17 @@
+{{extend 'layout.html'}}
+<center><img src="../static/images/images.png" style="width:200px;height:200px"></center>
+<form action="{{=URL('client_case_view')}}">
+   <h3>
+       
+     Enter your Case ID :&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="cid" required pattern="^[0-9]*$"/>
+    <br />
+       <br />
+    Enter your Mobile no. :<input type="tel" name="phn" required pattern="^[0-9]{10}$" />
+    <br />
+       <br />
+    Enter your Email :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" name="eid" required/></h3>
+    <br />
+    <br />
+    <textarea cols="40" id="page_body" name="body" rows="10"></textarea>
+    <center><input type="submit" value="Fetch My Details" /></center>
+    </form>

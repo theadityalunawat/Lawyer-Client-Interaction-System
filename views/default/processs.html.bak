@@ -1,0 +1,30 @@
+{{extend 'layout.html'}}
+{{flag=0}}
+{{client=0}}
+{{for row in rows:
+if(str(case_id) == str(row.id) and str(email_id)==str(row.email)):}}
+{{flag=1}}
+{{client=1}}
+{{break}}
+{{pass}}
+{{pass}}
+{{if(flag==0):}}
+    {{for row in rows:
+if(str(case_id) == str(row.id)):}}
+{{temp=row.law_id}}
+ {{for row1 in rows1:
+if(str(temp) == str(row1.id)):}}
+{{flag=1}}
+{{client=0}}
+{{pass}}
+{{pass}}
+{{pass}}
+{{pass}}
+{{pass}}
+{{if(flag==0):}}
+{{response.flash="Invalid Credentials"}}
+{{pass}}
+{{if(flag ==1):}}
+{{session.cli=client}}
+{{redirect(URL('queries'))}}
+{{pass}}

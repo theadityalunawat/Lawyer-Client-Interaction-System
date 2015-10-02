@@ -1,0 +1,122 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+, city CHAR(512), mobile DOUBLE);
+INSERT INTO "auth_user" VALUES(10,'aditya','lunawat','adityalunawat17@gmail.com','pbkdf2(1000,20,sha512)$9dc2e0d27520cee7$c9a42510d875a36a95ccb18c6539f26a165320e7','','','','Indore',9406649200.0);
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+INSERT INTO "auth_group" VALUES(1,'user_1','Group uniquely assigned to user 1');
+INSERT INTO "auth_group" VALUES(2,'user_2','Group uniquely assigned to user 2');
+INSERT INTO "auth_group" VALUES(3,'user_3','Group uniquely assigned to user 3');
+INSERT INTO "auth_group" VALUES(4,'user_4','Group uniquely assigned to user 4');
+INSERT INTO "auth_group" VALUES(5,'user_5','Group uniquely assigned to user 5');
+INSERT INTO "auth_group" VALUES(6,'user_6','Group uniquely assigned to user 6');
+INSERT INTO "auth_group" VALUES(7,'user_7','Group uniquely assigned to user 7');
+INSERT INTO "auth_group" VALUES(8,'user_8','Group uniquely assigned to user 8');
+INSERT INTO "auth_group" VALUES(9,'user_9','Group uniquely assigned to user 9');
+INSERT INTO "auth_group" VALUES(10,'user_10','Group uniquely assigned to user 10');
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+INSERT INTO "auth_membership" VALUES(10,10,10);
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+INSERT INTO "auth_event" VALUES(1,'2014-11-16 19:03:33','127.0.0.1',NULL,'auth','Group 1 created');
+INSERT INTO "auth_event" VALUES(8,'2014-11-16 19:05:02','127.0.0.1',NULL,'auth','Group 2 created');
+INSERT INTO "auth_event" VALUES(44,'2014-11-17 15:54:26','127.0.0.1',NULL,'auth','Group 3 created');
+INSERT INTO "auth_event" VALUES(47,'2014-11-17 15:58:39','127.0.0.1',NULL,'auth','Group 4 created');
+INSERT INTO "auth_event" VALUES(116,'2014-11-19 00:14:07','127.0.0.1',NULL,'auth','Group 5 created');
+INSERT INTO "auth_event" VALUES(135,'2014-11-19 19:13:55','127.0.0.1',NULL,'auth','Group 6 created');
+INSERT INTO "auth_event" VALUES(136,'2014-11-19 19:13:55','127.0.0.1',NULL,'auth','User 6 Registered');
+INSERT INTO "auth_event" VALUES(137,'2014-11-19 19:14:28','127.0.0.1',NULL,'auth','User 6 Verification email sent');
+INSERT INTO "auth_event" VALUES(138,'2014-11-19 19:20:01','127.0.0.1',NULL,'auth','Group 7 created');
+INSERT INTO "auth_event" VALUES(139,'2014-11-19 19:20:01','127.0.0.1',NULL,'auth','User 7 Registered');
+INSERT INTO "auth_event" VALUES(140,'2014-11-19 19:20:38','127.0.0.1',NULL,'auth','User 7 Verification email sent');
+INSERT INTO "auth_event" VALUES(141,'2014-11-19 19:31:07','127.0.0.1',NULL,'auth','Group 8 created');
+INSERT INTO "auth_event" VALUES(142,'2014-11-19 19:31:07','127.0.0.1',NULL,'auth','User 8 Registered');
+INSERT INTO "auth_event" VALUES(143,'2014-11-19 19:31:48','127.0.0.1',NULL,'auth','User 8 Verification email sent');
+INSERT INTO "auth_event" VALUES(144,'2014-11-19 19:44:13','127.0.0.1',NULL,'auth','Group 9 created');
+INSERT INTO "auth_event" VALUES(145,'2014-11-19 19:44:13','127.0.0.1',NULL,'auth','User 9 Registered');
+INSERT INTO "auth_event" VALUES(146,'2014-11-19 19:44:31','127.0.0.1',NULL,'auth','User 9 Verification email sent');
+INSERT INTO "auth_event" VALUES(147,'2014-11-19 19:52:30','127.0.0.1',NULL,'auth','Group 10 created');
+INSERT INTO "auth_event" VALUES(148,'2014-11-19 19:52:30','127.0.0.1',NULL,'auth','User 10 Registered');
+INSERT INTO "auth_event" VALUES(149,'2014-11-19 19:53:04','127.0.0.1',NULL,'auth','User 10 Verification email sent');
+INSERT INTO "auth_event" VALUES(150,'2014-11-19 19:53:11','127.0.0.1',10,'auth','User 10 Logged-in');
+INSERT INTO "auth_event" VALUES(151,'2014-11-19 19:53:19','127.0.0.1',10,'auth','User 10 Logged-out');
+INSERT INTO "auth_event" VALUES(152,'2014-11-19 19:53:19','127.0.0.1',10,'auth','User 10 Logged-out');
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+CREATE TABLE cases(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(512),
+    last_name CHAR(512),
+    email CHAR(512) UNIQUE,
+    Case_Description TEXT,
+    mobile_number DOUBLE,
+    Summon_date DATE
+, law_id CHAR(512));
+CREATE TABLE quer(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    case_id CHAR(512),
+    person CHAR(512),
+    Msg TEXT
+);
+CREATE TABLE rating(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email CHAR(512),
+    rating CHAR(512),
+    person_count DOUBLE,
+    feedback TEXT
+);
+CREATE TABLE feedb(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Enter_your_Name CHAR(512),
+    Feedback TEXT
+, name CHAR(512), feed TEXT);
+CREATE TABLE feedba(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(512),
+    feed TEXT
+);
+DELETE FROM sqlite_sequence;
+INSERT INTO "sqlite_sequence" VALUES('auth_user',10);
+INSERT INTO "sqlite_sequence" VALUES('auth_group',10);
+INSERT INTO "sqlite_sequence" VALUES('auth_event',152);
+INSERT INTO "sqlite_sequence" VALUES('auth_membership',10);
+INSERT INTO "sqlite_sequence" VALUES('cases',22);
+INSERT INTO "sqlite_sequence" VALUES('quer',9);
+INSERT INTO "sqlite_sequence" VALUES('rating',9);
+INSERT INTO "sqlite_sequence" VALUES('feedb',10);
+COMMIT;

@@ -1,0 +1,28 @@
+{{extend 'layout.html'}}
+<center><img src="../static/images/images6.png" style="width:200px;height:200px"></center>
+{{flag=0}}
+{{for row in rows:
+if(str(case_id) == str(row.id) and str(mobile)==str(row.mobile_number) and str(email_id)==str(row.email)):}}
+<br />
+{{flag=1}}
+<b>Case ID  :</b>
+{{=row.id}}
+<br /><b>First Name :</b>
+{{=row.first_name}}
+<br /><b>Last Name :</b>
+{{=row.last_name}}
+<br /><b>Summon Date :</b>
+{{=row.Summon_date}}
+<br /><b>Mobile No. :</b>
+{{=row.mobile_number}}
+<br /><b>Email :</b>
+{{=row.email}}
+<br /><b>Case Description :</b>
+{{=row.Case_Description}}
+{{pass}}
+{{pass}}
+{{if(flag==0):}}
+{{tmp="Invalid Credentials.Please enter again"}}
+{{redirect(URL('client_case_search'))}}
+{{=tmp}}
+{{pass}}

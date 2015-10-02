@@ -1,0 +1,32 @@
+{{extend 'layout.html'}}
+<table border="2px">
+    {{j=1}}
+    <tr><th>S No.</th><th>Case_Id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Mobile No.</th><th>Rating</th></tr>
+{{for row in rows:}}
+{{if(row.City == city):}}
+{{div=0}}
+{{a=row.email}}
+{{for i in rows1:}}
+{{if(str(i.email) == str(a)):}}
+{{t=i.person_count}}
+{{u=i.rating}}
+{{div=int(int(u)/int(t))}}
+{{pass}}
+{{pass}}
+{{if(div == 0):}}
+{{div='Not Rated'}}
+{{pass}}
+<tr>
+<td>{{=j}}</td>
+<td>{{=row.id}}</td>
+<td>{{=row.first_name}}</td>    
+<td>{{=row.last_name}}</td>
+<td>{{=row.email}}</td>
+<td>{{=row.Mobile}}</td>
+<td>{{=div}}</td>
+</tr>
+    {{j=j+1}}
+{{pass}}
+{{pass}}
+    </table>
+    <br />

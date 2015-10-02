@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+ <center><img src="../static/images/images.png" style="width:200px;height:200px"></center>
+{{l=[]}}
+{{for row in rows:
+l=l+[row.City]
+}}
+<br />
+{{pass}}
+{{lst=set(l)}}
+<form action="{{=URL('lawyer_found')}}">
+<h3>
+    Select Your City :
+    </h3>
+    <select name="city">
+{{for i in lst:}}
+<option value={{=i}}>{{=i}}</option>
+{{pass}}
+</select>
+    <br />
+    <input type="submit" name="view_all" value="Search Lawyers">
+    </form>
